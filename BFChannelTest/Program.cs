@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.IO;
 using Newtonsoft.Json;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace BFChannelTest
 {
@@ -24,22 +25,39 @@ namespace BFChannelTest
         /// we probably wouldn't intend on distribution of them, so likely the former!
         /// </TODO>
         /// <returns>Task</returns>
-        public static async Task GetDirectlineTokenAsync()
+        public static async Task GetDirectlineConversationAsync()
         {
             if (string.IsNullOrEmpty(_dlSecret))
                 throw new ArgumentNullException("Directline secret is empty! Please populate this value with GetDirectlineSecretFromConfig");
 
-            client.BaseAddress = new Uri("https://directline.botframework.com/");
-
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _dlSecret);
+            
+            // POST to token generate API
+            //HttpResponseMessage resp = await client.PostAsync(
+            //    new Uri("v3/directline/tokens/generate", UriKind.Relative),
+            //    new StringContent("")
+            //    );
+
+            // POST to get a conversation object
             HttpResponseMessage resp = await client.PostAsync(
-                new Uri("v3/directline/tokens/generate", UriKind.Relative),
-                new StringContent("")
+                new Uri("v3/directline/conversations", UriKind.Relative),
+                new StringContent(string.Empty)
                 );
 
+            var serializer = new JsonSerializer();
+            var stream = await resp.Content.ReadAsStreamAsync();
+            using (var streamReader = new StreamReader(stream))
+            {
+                using (var txtReader = new JsonTextReader(streamReader))
+                {
+                    DLConversation conv = serializer.Deserialize<DLConversation>(txtReader);
+                    Console.WriteLine(conv.ToString());
+                }
+            }
+
             // for now, just write out the content
-            var content = await resp.Content.ReadAsStringAsync();
-            Console.WriteLine(content);
+            // var content = await resp.Content.ReadAsStringAsync();
+            // Console.WriteLine(content);
         }
 
         /// <summary>
@@ -48,13 +66,15 @@ namespace BFChannelTest
         /// <param name="args">command line arguments</param>
         static void Main(string[] args)
         {
+            client.BaseAddress = new Uri("https://directline.botframework.com/");
+
             // Note: not adding try block here on purpose for debugging purposes!
             // IMPORTANT: Change this accordingly!!!
             // TODO: manage secrets better probably
             GetDirectlineSecretFromConfig(@"C:\Dev\BFChannelTest\BFChannelTest\secrets.json");
             
             // get a token from DL for use in this client channel
-            GetDirectlineTokenAsync().Wait();
+            GetDirectlineConversationAsync().Wait();
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -63,6 +83,9 @@ namespace BFChannelTest
         /// <summary>
         /// Retrieves a Directline secret from the provided file path
         /// </summary>
+        /// <TODO>
+        /// Find a much better way to do this!!!
+        /// </TODO>
         /// <param name="path"></param>
         /// <returns></returns>
         private static bool GetDirectlineSecretFromConfig(string filePath)
