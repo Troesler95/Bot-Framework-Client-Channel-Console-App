@@ -29,8 +29,6 @@ namespace BFChannelTest
             if (string.IsNullOrEmpty(_dlSecret))
                 throw new ArgumentNullException("Directline secret is empty! Please populate this value with GetDirectlineSecretFromConfig");
 
-            client.BaseAddress = new Uri("https://directline.botframework.com/");
-
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _dlSecret);
             HttpResponseMessage resp = await client.PostAsync(
                 new Uri("v3/directline/tokens/generate", UriKind.Relative),
@@ -48,6 +46,8 @@ namespace BFChannelTest
         /// <param name="args">command line arguments</param>
         static void Main(string[] args)
         {
+            client.BaseAddress = new Uri("https://directline.botframework.com/");
+
             // Note: not adding try block here on purpose for debugging purposes!
             // IMPORTANT: Change this accordingly!!!
             // TODO: manage secrets better probably
