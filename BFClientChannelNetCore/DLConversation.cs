@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IdentityModel.Tokens.Jwt;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using System.Net.Http;
-using Microsoft.IdentityModel.Tokens;
 
-namespace BFChannelTest
+namespace BFClientChannelNetCore
 {
     /// <summary>
     /// Container for the Directline endpoint payload
@@ -101,6 +93,10 @@ namespace BFChannelTest
             ReferenceGrammarId = new Guid(guid);
         }
 
+        /// <summary>
+        /// Converts this object in a string formatted to JSON
+        /// </summary>
+        /// <returns>the values in this class in string form</returns>
         public override string ToString()
         {
             return $"{{\r\n" +

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFChannelTest", "BFChannelTest\BFChannelTest.csproj", "{80A2D2BC-50EF-40B8-9A05-3CAD63BFE1D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFClientChannelNetCore", "BFClientChannelNetCore\BFClientChannelNetCore.csproj", "{4CD575D5-4396-4CBE-9142-47DC7CD0C270}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{80A2D2BC-50EF-40B8-9A05-3CAD63BFE1D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80A2D2BC-50EF-40B8-9A05-3CAD63BFE1D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80A2D2BC-50EF-40B8-9A05-3CAD63BFE1D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80A2D2BC-50EF-40B8-9A05-3CAD63BFE1D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CD575D5-4396-4CBE-9142-47DC7CD0C270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CD575D5-4396-4CBE-9142-47DC7CD0C270}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CD575D5-4396-4CBE-9142-47DC7CD0C270}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CD575D5-4396-4CBE-9142-47DC7CD0C270}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {C84083F6-0CE9-41E0-88F4-0BFA96939453}
+		SolutionGuid = {41B63548-BAE5-4A95-8909-6B7AACD0BCB4}
 	EndGlobalSection
 EndGlobal

@@ -1,15 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace BFChannelTest
+namespace BFClientChannelNetCore
 {
     /// <summary>
     /// Static manager class for Directline
@@ -19,7 +16,13 @@ namespace BFChannelTest
     {
         private static DLConversation _conv = null;
         private static string _dlSecret = string.Empty;
-        private static readonly string _confPath = @"C:\Dev\Bot-Framework-Client-Channel-Console-App\BFChannelTest\secrets.json";
+        /// <summary>
+        /// Configuration path of the Directline secret
+        /// be sure to set the "Copy to Output Directory" for this file
+        /// or change this value to an absolute path!
+        /// NEVER INCLUDE THIS IN GIT VC
+        /// </summary>
+        private static readonly string _confPath = @"secrets.json";
 
         /// <summary>
         /// Asynchronously gets a token from the Directline REST API for use in this client 
@@ -97,7 +100,7 @@ namespace BFChannelTest
 
                 return newConv;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("DLManager ERR: Unable to create DLConversation from provided JSON. Is it deformed or empty?");
 #if DEBUG
